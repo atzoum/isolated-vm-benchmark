@@ -9,19 +9,27 @@ node http.js --port 3333
 
 ```bash
 # benchmark ivm without caching 
-./wrk.sh http://localhost:3333/ivm-no-cache
+./wrk.sh http://localhost:3333/transformIvmNoCache
 
 # benchmark ivm without script caching (only isolate caching)
-./wrk.sh http://localhost:3333/ivm-no-script-cache
+./wrk.sh http://localhost:3333/transformIvmNoScriptCache
 
 # benchmark ivm without context caching (only isolate and script caching) 
-./wrk.sh http://localhost:3333/ivm-no-ctx-cache
+./wrk.sh http://localhost:3333/transformIvmNoCtxCache
 
 # benchmark ivm with caching (isolate, script, caching & function caching)
-./wrk.sh http://localhost:3333/ivm
+./wrk.sh http://localhost:3333/transformIvm
 
 # benchmark direct without ivm
-./wrk.sh http://localhost:3333/direct
+./wrk.sh http://localhost:3333/transformDirect
+
+
+# skip pooling
+./wrk.sh http://localhost:3333/no-pool/transformIvmNoCache
+./wrk.sh http://localhost:3333/no-pool/transformIvmNoScriptCache
+./wrk.sh http://localhost:3333/no-pool/transformIvmNoCtxCache
+./wrk.sh http://localhost:3333/no-pool/transformIvm
+./wrk.sh http://localhost:3333/no-pool/transformDirect
 
 ```
 

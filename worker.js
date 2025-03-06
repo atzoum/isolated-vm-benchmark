@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import ivm from 'isolated-vm';
 const __dirname = import.meta.dirname;
 
-const isolate = new ivm.Isolate({ memoryLimit: 512 }); // thread-local isolate
+const isolate = new ivm.Isolate({ memoryLimit: 2048 }); // thread-local isolate
 const script = await isolate.compileScript(await readFile(resolve(__dirname, 'worker-ivm-script.js'), 'utf8'));
 const context = await isolate.createContext(); // thread-local context
 await context.global.set("sha256", function (input) { return createHash('sha256').update(input).digest('base64') });
