@@ -8,13 +8,16 @@ node http.js --port 3333
 # Run benchmark
 
 ```bash
-# benchmark ivm without caching
+# benchmark ivm without caching 
 ./wrk.sh http://localhost:3333/ivm-no-cache
 
-# benchmark ivm without context caching
+# benchmark ivm without script caching (only isolate caching)
+./wrk.sh http://localhost:3333/ivm-no-script-cache
+
+# benchmark ivm without context caching (only isolate and script caching) 
 ./wrk.sh http://localhost:3333/ivm-no-ctx-cache
 
-# benchmark ivm with caching
+# benchmark ivm with caching (isolate, script, caching & function caching)
 ./wrk.sh http://localhost:3333/ivm
 
 # benchmark direct without ivm
@@ -29,11 +32,15 @@ node http.js --port 3333
 # Requests/sec:   1858.34
 # CPU: 100%
 
-# ivm without context caching
+# ivm without script caching (only isolate caching)
+# Requests/sec:   6673.61
+# CPU: 100%
+
+# ivm without context caching (only isolate and script caching)
 # Requests/sec:   7251.43
 # CPU: 100%
 
-# ivm with caching
+# ivm with caching (isolate, script, caching & function caching)
 # Requests/sec:   9743.46
 # CPU: 100%
 

@@ -19,6 +19,23 @@ export async function transformIvm({ body }) {
     });
 };
 
+// caching the isolate but not the script or the context
+export async function transformIvmNoScriptCache({ body }) {
+    const context = await isolate.createContext();
+    await context.global.set("sha256", function (input) { return createHash('sha256').update(input).digest('base64') });
+    const script = await isolate.compileScript(await readFile(resolve(__dirname, 'worker-ivm-script.js'), 'utf8'));
+    const transformScript = await script.run(context, { reference: true });
+    const res = await transformScript.apply(undefined, [body], {
+        result: {
+            promise: true,
+        }
+    });
+    script.release();
+    transformScript.release();
+    context.release();
+    return res
+};
+
 // caching the isolate but not the context
 export async function transformIvmNoCtxCache({ body }) {
     const context = await isolate.createContext();

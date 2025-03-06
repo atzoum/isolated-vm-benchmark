@@ -15,19 +15,22 @@ fastify.addContentTypeParser('application/json', { parseAs: 'string' }, function
     done(null, body); // no JSON.parse
 })
 fastify.post('/', async (request, reply) => {
-    reply.send(await fastify.piscina.run({ body: request.body}, {name: 'default' }));
+    reply.send(await fastify.piscina.run({ body: request.body }, { name: 'default' }));
 });
 fastify.post('/ivm', async (request, reply) => { // caching both the isolate and the context
-    reply.send(await fastify.piscina.run({ body: request.body}, {name: 'transformIvm' }));
+    reply.send(await fastify.piscina.run({ body: request.body }, { name: 'transformIvm' }));
+});
+fastify.post('/ivm-no-script-cache', async (request, reply) => { // caching the isolate but not the script or the context
+    reply.send(await fastify.piscina.run({ body: request.body }, { name: 'transformIvmNoScriptCache' }));
 });
 fastify.post('/ivm-no-ctx-cache', async (request, reply) => { // caching the isolate but not the context
-    reply.send(await fastify.piscina.run({ body: request.body}, {name: 'transformIvmNoCtxCache' }));
+    reply.send(await fastify.piscina.run({ body: request.body }, { name: 'transformIvmNoCtxCache' }));
 });
 fastify.post('/ivm-no-cache', async (request, reply) => { // not caching the isolate nor the context
-    reply.send(await fastify.piscina.run({ body: request.body}, {name: 'transformIvmNoCache' }));
+    reply.send(await fastify.piscina.run({ body: request.body }, { name: 'transformIvmNoCache' }));
 });
 fastify.post('/direct', async (request, reply) => {
-    reply.send(await fastify.piscina.run({ body: request.body}, {name: 'transformDirect' }));
+    reply.send(await fastify.piscina.run({ body: request.body }, { name: 'transformDirect' }));
 });
 
 const port = process.argv.includes('--port') ? process.argv[process.argv.indexOf('--port') + 1] : 3333;
