@@ -1,7 +1,9 @@
 
 function fn(event) {
     const email = event.email;
-    if (email) event.email = sha256(email);
+    for (let i of Array(1)) { // simulate a heavy operation
+        if (email) event.email = sha256(email);
+    }
     return event;
 }
 

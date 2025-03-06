@@ -1,8 +1,11 @@
 # Run http server
 
 ```bash
-# run http server on port 3333
-node http.js --port 3333
+# run http server on port 3333 with 10 processes
+node http.js -p 3333 -procs 10
+
+# run http server on port 3333 using a single process with 10 threads and 10 concurrent tasks per thread
+node http.js -p 3333 -procs 1 -t 10 -c 10
 ```
 
 # Run benchmark
@@ -40,6 +43,10 @@ node http.js --port 3333
 # Requests/sec:   1858.34
 # CPU: 100%
 
+# ivm without caching no pool with 4 processes
+# Requests/sec:   2426.94
+# CPU: 100%
+
 # ivm without script caching (only isolate caching)
 # Requests/sec:   6673.61
 # CPU: 100%
@@ -55,4 +62,8 @@ node http.js --port 3333
 # direct without ivm
 # Requests/sec:  29356.93
 # CPU: 70%
+
+# direct without ivm without pooling and with 10 processes
+# Requests/sec:  76986.05
+# CPU: 100%
 ```

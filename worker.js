@@ -95,7 +95,9 @@ export async function transformDirect({ body }) {
 
 function fn(event) {
     const email = event.email;
-    if (email) event.email = createHash('sha256').update(email).digest('base64');
+    for (let i of Array(1)) { // simulate a heavy operation
+        if (email) event.email = createHash('sha256').update(email).digest('base64');
+    }
     return event;
 }
 
