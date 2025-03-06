@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "fastify": "^5.2.1",
+    "fastify-piscina": "^5.0.0",
+    "isolated-vm": "^5.0.4"
+  }
+}
